@@ -11,7 +11,7 @@ class Main extends React.Component {
   constructor(props) {
     super(props);
 
-    this.updateStreamMetaParams = this.updateStreamMetaParams.bind(this);
+    this.handleUpdatesToQueryParams = this.handleUpdatesToQueryParams.bind(this);
     this.handleUpdatesToFilter = this.handleUpdatesToFilter.bind(this);
     this.itemsWithMatchingTitle = this.itemsWithMatchingTitle.bind(this);
     this.itemsSortedNewestFirst = this.itemsSortedNewestFirst.bind(this);
@@ -37,7 +37,7 @@ class Main extends React.Component {
     }
   }
 
-  updateStreamMetaParams(limit, offset) {
+  handleUpdatesToQueryParams(limit, offset) {
     this.setState({ limit, offset });
   }
 
@@ -75,7 +75,7 @@ class Main extends React.Component {
         <Stream 
           pressReleases={this.state.pressReleases} 
           loadMore={this.pressReleaseStore.fetchAndLoadData}
-          updateStreamMetaParams={this.updateStreamMetaParams}
+          updateStreamMetaParams={this.handleUpdatesToQueryParams}
           endOfStream={this.pressReleaseStore.isMoreDataAvailableFromServer()}
           filterTerm={this.state.filterTerm}
           limit={this.state.limit}
