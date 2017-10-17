@@ -5,11 +5,11 @@ const API_ENDPOINT = "https://www.stellarbiotechnologies.com/media/press-release
 export default class PressReleaseStore {
   constructor() {
     this.items = this.items.bind(this);
-    this.fetchItems = this.fetchItems.bind(this);
-    this.loadMore = this.loadMore.bind(this);
-    this.publishChanges = this.publishChanges.bind(this);
     this.flatMap = this.flatMap.bind(this);
-    this.endOfStream = this.endOfStream.bind(this);
+    this.isMoreDataAvailableFromServer = this.isMoreDataAvailableFromServer.bind(this);
+    this.fetchItems = this.fetchItems.bind(this);
+    this.fetchAndLoadData= this.fetchAndLoadData.bind(this);
+    this.publishChanges = this.publishChanges.bind(this);
 
     this._identityMap = new Map();
     this._maxId = 0;
@@ -21,10 +21,10 @@ export default class PressReleaseStore {
 
     this.itemListeners = new ListenerSupport();
 
-    this.loadMore(this.defaultLimit, this.defaultOffset);
+    this.fetchAndLoadData(this.defaultLimit, this.defaultOffset);
   }
 
-  endOfStream() {
+  isMoreDataAvailableFromServer() {
     return this._limitReached;
   }
 
@@ -32,7 +32,7 @@ export default class PressReleaseStore {
     return Object.freeze([...this.flatMap()]);
   }
 
-  loadMore(limit, offset) {
+  fetchAndLoadData(limit, offset) {
     return this.fetchItems(limit, offset).then(this.publishChanges);
   }
 
