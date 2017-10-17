@@ -1,0 +1,67 @@
+body {
+  margin: 0;
+  font-family: 'Roboto';
+  background: #F5F5F5;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  background: #00AAFF;
+  padding: 1rem;
+  color: white;
+  box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.25);
+  margin-bottom: 1rem;
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: row;
+}
+
+.title {
+  font-weight: bold;
+  flex-grow: 1;
+}
+
+.menu {
+  cursor: pointer;
+}
+
+.stream {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  position: relative;
+  width: 90%;
+}
+
+.loading-item {
+  border-radius: 4px;
+  margin-bottom: 0.5rem;
+  padding: 1rem;
+  text-align: center;
+}
+.stream-item {
+  background-color: white;
+  border-radius: 4px;
+  margin-bottom: 0.5rem;
+  padding: 1rem;
+}
+.stream-item .title {
+  font-size: 1.35rem;
+  font-weight: 400;
+  margin-bottom: 1rem;
+}
+.stream-item .meta {
+  color: #808080;
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  .stream {
+    width: 50%;
+  } 
+}
+/*# sourceMappingURL=app.styles.css.map*/
