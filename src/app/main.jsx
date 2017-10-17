@@ -12,7 +12,7 @@ class Main extends React.Component {
     super(props);
 
     this.updateStreamMetaParams = this.updateStreamMetaParams.bind(this);
-    this.updateStreamFilter = this.updateStreamFilter.bind(this);
+    this.handleUpdatesToFilter = this.handleUpdatesToFilter.bind(this);
     this.itemsWithMatchingTitle = this.itemsWithMatchingTitle.bind(this);
     this.itemsSortedNewestFirst = this.itemsSortedNewestFirst.bind(this);
 
@@ -23,7 +23,7 @@ class Main extends React.Component {
     this.pressReleaseStore.itemListeners.register(updatedPressReleases => {
       var pressReleases;
 
-      pressReleases = this.filterStream(this.state.filterTerm, updatedPressReleases);
+      pressReleases = this.filterStream({term: this.state.filterTerm}, updatedPressReleases);
       pressReleases = this.itemsSortedNewestFirst(pressReleases);
 
       this.setState({ pressReleases:  pressReleases });
@@ -41,16 +41,16 @@ class Main extends React.Component {
     this.setState({ limit, offset });
   }
 
-  updateStreamFilter(term) {
+  handleUpdatesToFilter(term) {
     this.setState({
       filterTerm: term, 
-      pressReleases: this.filterStream(term, this.pressReleaseStore.items())
+      pressReleases: this.filterStream({term: term}, this.pressReleaseStore.items())
     });
   }
 
-  filterStream(term, pressReleases) {
-    if (term) {
-      const lowerCaseTerm = term.toLowerCase();
+  filterStream(opts, pressReleases) {
+    if (opts.term) {
+      const lowerCaseTerm = opts.term.toLowerCase();
       return this.itemsWithMatchingTitle(lowerCaseTerm)(pressReleases);
     }
 
@@ -71,7 +71,7 @@ class Main extends React.Component {
     return (
       <div className="container">
         <Header />
-        <FilterInput updateStreamFilter={this.updateStreamFilter} />
+        <FilterInput updateStreamFilter={this.handleUpdatesToFilter} />
         <Stream 
           pressReleases={this.state.pressReleases} 
           loadMore={this.pressReleaseStore.fetchAndLoadData}
