@@ -4,9 +4,6 @@ const API_ENDPOINT = "https://www.stellarbiotechnologies.com/media/press-release
 
 export default class PressReleaseStore {
   constructor() {
-    this.items = this.items.bind(this);
-    this.flatMap = this.flatMap.bind(this);
-    this.isMoreDataAvailableFromServer = this.isMoreDataAvailableFromServer.bind(this);
     this.fetchItems = this.fetchItems.bind(this);
     this.fetchAndLoadData= this.fetchAndLoadData.bind(this);
     this.publishChanges = this.publishChanges.bind(this);
@@ -29,7 +26,7 @@ export default class PressReleaseStore {
   }
 
   items() {
-    return Object.freeze([...this.flatMap()]);
+    return Object.freeze([...this.flattenIdentityMap()]);
   }
 
   fetchAndLoadData(limit, offset) {
@@ -64,7 +61,7 @@ export default class PressReleaseStore {
 
       // Check if we've added new items to the identity map
       if (this._count > oldCount) {
-        this.itemListeners.fire(this.flatMap());
+        this.itemListeners.fire(this.flattenIdentityMap());
       }
       else {
         this._limitReached = true;
@@ -81,7 +78,7 @@ export default class PressReleaseStore {
     return this._maxId += 1;
   }
 
-  flatMap() {
+  flattenIdentityMap() {
     return Array.from(this._identityMap).map(pair => pair[1]);
   }
 }
