@@ -27,7 +27,9 @@ class Stream extends React.Component {
 
     this.props.loadMore(limit, offset).then(() => {
       this.setState({isLoading: false})
-      this.props.updateStreamMetaParams(limit, offset);
+      if (!this.props.endOfStream) {
+        this.props.updateStreamMetaParams(limit, offset);
+      }
     });
   }
 
