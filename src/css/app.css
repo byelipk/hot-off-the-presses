@@ -84,6 +84,7 @@ body {
 }
 .stream-empty {
   color: #333;
+  font-size: 2rem;
 }
 
 /* Large devices (desktops, 992px and up) */
