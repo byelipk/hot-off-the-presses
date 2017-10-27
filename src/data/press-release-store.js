@@ -32,10 +32,6 @@ export default class PressReleaseStore {
   }
 
   fetchItems(limit, offset) {
-    if (this._limitReached) {
-      return Promise.resolve({news: []});
-    }
-
     var url = encodeURI(`${API_ENDPOINT}?limit=${limit}&offset=${offset}`);
 
     return fetch(url)

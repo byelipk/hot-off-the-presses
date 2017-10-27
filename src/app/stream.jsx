@@ -20,12 +20,12 @@ class Stream extends React.Component {
   }
 
   handleInfiniteLoad() {
-    this.setState({ isLoading: true});
-
-    const limit = this.props.limit;
-    const offset = this.props.offset + this.props.limit;
-
     if (!this.props.endOfStream) {
+      var limit = this.props.limit;
+      var offset = this.props.offset + this.props.limit;
+
+      this.setState({ isLoading: true});
+
       this.props.loadMore(limit, offset).then(() => {
         this.setState({isLoading: false})
         this.props.updateStreamMetaParams(limit, offset);
