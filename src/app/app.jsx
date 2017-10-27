@@ -7,7 +7,7 @@ import Stream from './stream';
 
 import { filterWith } from '../utils/functional';
 
-class Main extends React.Component {
+class App extends React.Component {
   constructor(props) {
     super(props);
 
@@ -85,4 +85,4 @@ class Main extends React.Component {
   }
 }
 
-export default Main;
+export default App;
