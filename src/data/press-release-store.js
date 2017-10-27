@@ -36,7 +36,9 @@ export default class PressReleaseStore {
       return Promise.resolve({news: []});
     }
 
-    return fetch(`${API_ENDPOINT}?limit=${limit}&offset=${offset}`)
+    var url = encodeURI(`${API_ENDPOINT}?limit=${limit}&offset=${offset}`);
+
+    return fetch(url)
       .then(response => response.json())
       .then(json => json)
       .catch(err => console.error(err))
